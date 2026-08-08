@@ -1,8 +1,19 @@
 aid: blaize
 name: Blaize
-description: 'Blaize is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Blaize (NASDAQ: BZAI) is an edge AI company headquartered in El Dorado
+  Hills, California that builds a programmable inference platform uniting silicon and
+  software. Its Graph Streaming Processor (GSP) powers the Pathfinder and Xplorer accelerator
+  families — SoM, M.2, EDSFF and PCIe form factors plus the DST developer station and
+  Blaize Inference Server — and its software layer pairs the Picasso SDK (C++, Python,
+  OpenVX, with TensorFlow/PyTorch/ONNX import via NetDeploy) with AI Studio, a code-free
+  environment spanning the full edge AI DataOps/DevOps/MLOps lifecycle. In April 2026
+  Blaize announced a planned Blaize AI Services platform that packages multimodal inference,
+  business logic and orchestration as modular application-level APIs across vision,
+  video, document, speech and moderation workloads. The developer surface — SDK downloads,
+  repositories and reference material — is served from a self-hosted GitLab at software.blaize.com
+  and requires an account, so no public machine-readable API contract is published.'
 url: https://raw.githubusercontent.com/api-evangelist/blaize/refs/heads/main/apis.yml
+image: https://www.blaize.com/wp-content/uploads/2020/08/BLZ-Logo-RGB-Black.svg
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
@@ -12,6 +23,14 @@ created: '2026-08-07'
 modified: '2026-08-07'
 tags:
 - Company
+- Artificial Intelligence
+- Edge Computing
+- Machine Learning
+- Inference
+- Semiconductors
+- Computer Vision
+- MLOps
+- Hardware
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +38,59 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/blaize-domain-security.yml
+- type: LLMsTxt
+  url: llms/blaize-llms.txt
 - type: Website
+  url: https://www.blaize.com/
+- type: SecondaryMarket
   url: https://forgeglobal.com/blaize_stock/
+- type: DeveloperPortal
+  url: https://developer.blaize.com/
+- type: Support
+  url: https://blaize.freshdesk.com/support/login
+- type: Blog
+  url: https://www.blaize.com/blog/
+- type: TermsOfService
+  url: https://www.blaize.com/terms/
+- type: PrivacyPolicy
+  url: https://www.blaize.com/privacy/
+- type: Legal
+  url: https://www.blaize.com/legal/
+- type: ResourceCenter
+  url: https://www.blaize.com/resource-center/
+- type: Downloads
+  url: https://www.blaize.com/downloads/
+- type: Company
+  url: https://www.blaize.com/company/
+- type: Press
+  url: https://www.blaize.com/press/
+- type: Contact
+  url: https://www.blaize.com/contact/
+x-enrichment:
+  date: '2026-08-07'
+  status: minimal
+  artifacts_added: 6
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: partner-login
+  detail: >-
+    developer.blaize.com 302s into a self-hosted GitLab sign-in at
+    software.blaize.com/users/sign_in where the Picasso SDK and all reference
+    material live, and that instance's public projects API returns an empty
+    array — the announced Blaize AI Services "modular APIs" have no reachable
+    contract outside the account wall.
+  evidence:
+  - url: https://developer.blaize.com/
+    status: 302
+  - url: https://software.blaize.com/api/v4/projects
+    status: 200
+  - url: https://www.blaize.com/openapi.json
+    status: 404
+  - url: https://www.blaize.com/llms.txt
+    status: 404
+  - url: https://software.blaize.com/api/v4/mcp
+    status: 401
+  checked: '2026-08-07'
