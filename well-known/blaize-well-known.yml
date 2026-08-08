@@ -1,0 +1,93 @@
+generated: '2026-08-07'
+method: probed
+source: live GET of /.well-known/* on every Blaize host known to the profile
+note: >-
+  Blaize publishes no /.well-known/ surface on its marketing/corporate host
+  (www.blaize.com — every path 404s). The only anonymously readable discovery
+  documents sit on software.blaize.com, which is Blaize's SELF-HOSTED GITLAB
+  instance (developer.blaize.com 302s into it). Those OIDC/OAuth documents are
+  stock GitLab discovery for the code portal, not a contract for a Blaize
+  product API — they are recorded here as observed fact and deliberately NOT
+  wired as an Authentication / OAuthScopes / MCPServer pointer for Blaize.
+hosts:
+- host: https://www.blaize.com
+  role: corporate + product marketing (WordPress)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://software.blaize.com
+  role: self-hosted GitLab developer/software portal (target of developer.blaize.com)
+  soft_404: >-
+    Every unknown path on this host answers HTTP 200 with the GitLab sign-in
+    HTML (13039 bytes, identical to a control path). Only the three documents
+    below returned application/json and are genuine hits.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: blaize-openid-configuration.json
+    kind: OIDC discovery (GitLab)
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: blaize-oauth-authorization-server.json
+    kind: RFC 8414 authorization server metadata (GitLab)
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: blaize-oauth-protected-resource.json
+    kind: RFC 9728 protected resource metadata (GitLab)
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    hit: false
+    note: soft-404 — body is the GitLab sign-in page, not RFC 9116 text
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    hit: false
+    note: soft-404 — GitLab sign-in page
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    hit: false
+    note: soft-404 — GitLab sign-in page
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    hit: false
+    note: soft-404 — GitLab sign-in page, not an AgentCard; no a2a/ artifact written
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    hit: false
+    note: soft-404 — GitLab sign-in page, not an AgentCard
+observed:
+  protected_resource: https://software.blaize.com/api/v4/mcp
+  protected_resource_note: >-
+    The RFC 9728 document advertises GitLab's built-in MCP endpoint on the
+    Blaize host, scope "mcp". Probed with a JSON-RPC tools/list POST on
+    2026-08-07 and it returned HTTP 401 {"message":"401 Unauthorized"} — the
+    tool set is auth-gated. It exposes GitLab repository operations, not a
+    Blaize product API, so no MCPServer pointer is claimed for Blaize.
+  gitlab_public_projects: 'GET https://software.blaize.com/api/v4/projects returned
+    200 with an empty array — no public projects.'
+x-evidence:
+  fetched: '2026-08-07'
+  control_path: https://software.blaize.com/this-path-does-not-exist-xyz123
+  control_status: 200
+  control_content_type: text/html
