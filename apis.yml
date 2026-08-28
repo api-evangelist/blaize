@@ -13,6 +13,17 @@ description: 'Blaize (NASDAQ: BZAI) is an edge AI company headquartered in El Do
   repositories and reference material — is served from a self-hosted GitLab at software.blaize.com
   and requires an account, so no public machine-readable API contract is published.'
 url: https://raw.githubusercontent.com/api-evangelist/blaize/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.blaize.com/wp-content/uploads/2020/08/BLZ-Logo-RGB-Black.svg
 x-type: company
 x-source: harvest:secondary-market
