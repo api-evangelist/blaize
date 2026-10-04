@@ -48,10 +48,10 @@ tags:
 - Company
 - Artificial Intelligence
 - Edge Computing
-- Machine-Learning
+- Machine Learning
 - Inference
 - Semiconductors
-- Computer-Vision
+- Computer Vision
 - MLOps
 - Hardware
 tags_raw:
@@ -64,6 +64,8 @@ tags_raw:
 - Computer Vision
 - MLOps
 - Hardware
+- Machine-Learning
+- Computer-Vision
 apis: []
 maintainers:
 - FN: Kin Lane
